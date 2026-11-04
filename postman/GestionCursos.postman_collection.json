@@ -1,0 +1,18 @@
+{
+  "info": {"name":"Gestion de Cursos","schema":"https://schema.getpostman.com/json/collection/v2.1.0/collection.json"},
+  "variable":[{"key":"baseUrl","value":"http://localhost:8080"},{"key":"cursoId","value":"1"},{"key":"inscripcionId","value":"1"}],
+  "item":[
+    {"name":"Registrar curso","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"url":"{{baseUrl}}/api/cursos","body":{"mode":"raw","raw":"{\n  \"nombre\": \"Java básico\",\n  \"descripcion\": \"Fundamentos de Java\",\n  \"fechaInicio\": \"2027-01-10\",\n  \"fechaFin\": \"2027-02-10\",\n  \"cupoMaximo\": 25\n}"}}},
+    {"name":"Listar todos los cursos","request":{"method":"GET","url":"{{baseUrl}}/api/cursos"}},
+    {"name":"Listar cursos disponibles","request":{"method":"GET","url":"{{baseUrl}}/api/cursos/disponibles"}},
+    {"name":"Inscribir participante","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"url":"{{baseUrl}}/api/cursos/{{cursoId}}/inscripciones","body":{"mode":"raw","raw":"{\n  \"nombreParticipante\": \"Juan Pérez\",\n  \"edadParticipante\": 20,\n  \"correo\": \"juan@correo.com\"\n}"}}},
+    {"name":"Participantes de un curso","request":{"method":"GET","url":"{{baseUrl}}/api/cursos/{{cursoId}}/inscripciones"}},
+    {"name":"Cancelar inscripción","request":{"method":"PATCH","url":"{{baseUrl}}/api/inscripciones/{{inscripcionId}}/cancelar"}},
+    {"name":"Consultar por correo","request":{"method":"GET","url":"{{baseUrl}}/api/inscripciones/correo?correo=juan%40correo.com"}},
+    {"name":"Consultar detalle","request":{"method":"GET","url":"{{baseUrl}}/api/inscripciones/{{inscripcionId}}"}},
+    {"name":"Consultar por estado","request":{"method":"GET","url":"{{baseUrl}}/api/inscripciones/estado?estado=ACTIVA"}},
+    {"name":"Cambiar curso a EN_CURSO","request":{"method":"PATCH","header":[{"key":"Content-Type","value":"application/json"}],"url":"{{baseUrl}}/api/cursos/{{cursoId}}/estado","body":{"mode":"raw","raw":"{\n  \"estado\": \"EN_CURSO\"\n}"}}},
+    {"name":"Cambiar curso a FINALIZADO","request":{"method":"PATCH","header":[{"key":"Content-Type","value":"application/json"}],"url":"{{baseUrl}}/api/cursos/{{cursoId}}/estado","body":{"mode":"raw","raw":"{\n  \"estado\": \"FINALIZADO\"\n}"}}},
+    {"name":"Registrar calificación","request":{"method":"PATCH","header":[{"key":"Content-Type","value":"application/json"}],"url":"{{baseUrl}}/api/inscripciones/{{inscripcionId}}/calificacion","body":{"mode":"raw","raw":"{\n  \"calificacion\": 9.5\n}"}}}
+  ]
+}
